@@ -3,7 +3,7 @@ package main
 import "yaml2go/task"
 
 func main() {
-	task.Convert(
+	result := task.Convert(
 		`
 test:
   test1:
@@ -14,4 +14,5 @@ test:
   test6: ddd
 test0: eee
 `, "    ")
+	println(result)
 }

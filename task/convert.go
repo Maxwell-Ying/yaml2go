@@ -1,7 +1,6 @@
 package task
 
 import (
-	"fmt"
 	"gopkg.in/yaml.v2"
 	"reflect"
 	"strings"
@@ -16,10 +15,10 @@ func Convert(yamlCode string, indent string) string {
 		return err.Error()
 	}
 
-	fmt.Printf("%v", t)
+	//fmt.Printf("%v", t)
 
 	result := formatMap(t, 0, indent, "Config")
-	println(result)
+	//println(result)
 	return result
 }
 
