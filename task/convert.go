@@ -28,19 +28,21 @@ func formatMap(m map[string]interface{}, index int, indent string, outName strin
 	result = append(result, getHeader(index, indent, outName))
 
 	for key, value := range m {
-		if reflect.TypeOf(value).Kind() == reflect.String {
-			result = append(result, getBody(index, indent, key, value))
-		} else if reflect.TypeOf(value).Kind() == reflect.Map {
+		if reflect.TypeOf(value).Kind() == reflect.Map {
 			newValue := getMap(value.(map[interface{}]interface{}))
 			result = append(result, formatMap(newValue, index+1, indent, key))
 		} else if reflect.TypeOf(value).Kind() == reflect.Array {
 			result = append(result, getArrayBody(index, indent, key, value.([]interface{})))
+		} else {
+			result = append(result, getBody(index, indent, key, value))
 		}
 	}
 
 	result = append(result, getFooter(index, indent, outName))
 
-	return strings.Join(result, "\n")
+	resultString := strings.Join(result, "\n")
+
+	return resultString
 }
 
 func getMap(m map[interface{}]interface{}) map[string]interface{} {
